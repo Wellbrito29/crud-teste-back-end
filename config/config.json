@@ -1,0 +1,13 @@
+{
+    "server": {
+      "listen": 3000
+    },
+    "database": {
+      "username": "awtlmaxy",
+      "password": "Vw4jNuauBIGL2UUtzYXpgxlmqvp6iAIY",
+      "database": "awtlmaxy",
+      "host": "tuffi.db.elephantsql.com",
+      "port": 5432,
+      "dialect": "postgres"
+    }
+  }
