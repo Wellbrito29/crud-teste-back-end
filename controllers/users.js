@@ -1,35 +1,50 @@
-const User = require('../models/user')
+const User = require("../models/user");
 
 module.exports = {
   create(req, res) {
-    return User
-      .create({
-        name: req.body.name,
-        birth: req.body.birth,
-        photo: req.body.photo,
+    console.log(req.body);
+    return User.findOne({ where: { codigo: req.body.codigo } })
+      .then((foundedUser) => {
+        console.log("--------");
+        console.log(foundedUser);
+        if (!foundedUser) {
+          console
+            .log("oiiii")
+           return User.create({
+              name: req.body.name,
+              birth: req.body.birth,
+              photo: req.body.photo,
+              codigo: req.body.codigo,
+            })
+            .then((user) =>  res.status(201).send(user))
+            .catch((error) => {
+              console.log(error);
+              res.status(409).send(error);
+            });
+        } else {
+          console.log("ja tem")
+          return res.status(404).send({
+            message: "Usuário já cadastrado",
+          });
+        }
       })
-      .then((user) => res.status(201).send(user))
       .catch((error) => res.status(400).send(error));
   },
 
   list(req, res) {
-    return User
-      .findAll({
-        order: [
-          ['createdAt', 'DESC'],
-        ],
-      })
+    return User.findAll({
+      order: [["createdAt", "DESC"]],
+    })
       .then((users) => res.status(200).send(users))
       .catch((error) => res.status(400).send(error));
   },
 
   retrieve(req, res) {
-    return User
-      .findByPk(req.params.userId)
+    return User.findByPk(req.params.userId)
       .then((user) => {
         if (!user) {
           return res.status(404).send({
-            message: 'User Not Found',
+            message: "User Not Found",
           });
         }
         return res.status(200).send(user);
@@ -38,12 +53,11 @@ module.exports = {
   },
 
   update(req, res) {
-    return User
-      .findByPk(req.params.userId)
-      .then(user => {
+    return User.findByPk(req.params.userId)
+      .then((user) => {
         if (!user) {
           return res.status(404).send({
-            message: 'User Not Found',
+            message: "User Not Found",
           });
         }
         return user
@@ -59,12 +73,11 @@ module.exports = {
   },
 
   destroy(req, res) {
-    return User
-      .findByPk(req.params.userId)
-      .then(user => {
+    return User.findByPk(req.params.userId)
+      .then((user) => {
         if (!user) {
           return res.status(400).send({
-            message: 'User Not Found',
+            message: "User Not Found",
           });
         }
         return user

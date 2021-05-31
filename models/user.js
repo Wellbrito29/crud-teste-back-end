@@ -8,8 +8,10 @@ const User = sequelize.define('users', {
         autoIncrement: true
     },
     name: Sequelize.TEXT,
-    birth: Sequelize.DATE,
+    birth: Sequelize.TEXT,
     photo: Sequelize.TEXT,
+    codigo: Sequelize.TEXT
+
 })
 
 module.exports = User;
