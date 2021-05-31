@@ -34,6 +34,6 @@ app.all('*', function(req, res){
   return res.sendStatus(404)
 })
 
-app.listen(config.listen, function(){
+app.listen(process.env.PORT || config.listen, function(){
   console.log('\x1b[32m%s\x1b[0m',`SERVER LISTENING AT ${config.listen}`)
 })
