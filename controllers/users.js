@@ -63,6 +63,7 @@ module.exports = {
             name: req.body.name || user.name,
             birth: req.body.birth || user.birth,
             photo: req.body.photo || user.photo,
+            codigo: req.body.codigo || user.codigo
           })
           .then(() => res.status(200).send(user))
           .catch((error) => res.status(400).send(error));
