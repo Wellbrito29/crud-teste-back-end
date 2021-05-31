@@ -5,8 +5,6 @@ module.exports = {
     console.log(req.body);
     return User.findOne({ where: { codigo: req.body.codigo } })
       .then((foundedUser) => {
-        console.log("--------");
-        console.log(foundedUser);
         if (!foundedUser) {
           console
             .log("oiiii")

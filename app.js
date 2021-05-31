@@ -9,8 +9,8 @@ const sequelize = require('./database.js');
 
 const app = express();
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({limit: '5mb'}));
+app.use(express.urlencoded({ extended: false,limit: '5mb' }));
 
 const models = glob.sync('./models/*.js')
 for(model of models){
